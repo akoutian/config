@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# cat
+alias cat='bat'
+
+# fzf
+alias cdf='cd $(find ~ -type d -print | fzf)'
+alias vimf='vim $(fzf)'
+alias zathuraf='zathura $(fzf)'
+alias sxivf='sxiv $(fzf)'
+alias mpvf='mpv --playlist="$(fzf)" --ytdl-format="bestvideo[height<=480]+bestaudio/best"'
+
+## rm - mv - cp
+alias remove='rm -i'
+alias copy='cp -i'
+alias move='mv -i'
+
+## ls
+alias ls='ls -vhF --color --group-directories-first'
+alias ll='ls -al'
+
+## ip
+alias ipa='ip -c=auto a'
+
+## maintenance
+alias brokenlinks='sudo find / -xtype l -print'
+
+## git
+alias fetchit='git fetch --all'
+alias logit='git log --graph --decorate --oneline'
+alias gits='git status -sb'
+alias showit='git show --name-status'
+alias tigg='tig --all'
+alias groot='cd $(git rev-parse --show-toplevel)'
+
+## gnome disk utility
+alias diskoff='udisksctl power-off -b'
+
+## fan
+alias fanauto='echo level auto | sudo tee /proc/acpi/ibm/fan'
+alias fanfull='echo level full-speed | sudo tee /proc/acpi/ibm/fan'
+
+## graphics-related
+# am I running X or Wayland?
+alias xorwayland='echo $XDG_SESSION_TYPE'
+# who is my OpenGL renderer?
+alias openglwho='glxinfo | grep OpenGL'
+
+## networking
+alias checkopenports='sudo lsof -i -P -n | grep LISTEN'
+alias nlisten='netstat -anvp tcp | awk "NR<3 || /LISTEN/"'
+alias wifiscan='nmcli device wifi list --rescan yes'
+
+## super dangerous
+# seriously?
+alias wipefsalias='sudo wipefs -a -f'
+
+## abook
+alias abook='abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook'
+
+## arduino
+alias arduino-cli='arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml'
+
+## irssi
+alias irssi='irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi'
+
+## julia
+alias julia='julia --history-file=no'
+
+## youtube-dl
+alias dlchan='youtube-dl -f best -ciw -o "%(title)s.%(ext)s" -v'
+
+## gammu
+alias gammu='gammu -c $XDG_CONFIG_HOME/gammu/gammurc'
+
+## monero
+alias monerod='monerod --prune-blockchain --data-dir=/mnt/krypti'
+alias monero-wallet-cli='monero-wallet-cli --log-file ""'
+
+## finch
+alias finch='finch -n --config $XDG_CONFIG_HOME/purple'
+
+## btrfs
+alias snaphome='sudo btrfs subvolume snapshot -r /home "/.snap/$(date +%Y.%m.%d-%H.%M.%S)-home"'
+alias snaproot='sudo btrfs subvolume snapshot -r / "/.snap/$(date +%Y.%m.%d-%H.%M.%S)-root"'
+
+## etckeeper
+alias eetc='sudo etckeeper vcs'
+
+## modemmanager
+alias modem='mmcli -m $(mmcli --output-keyvalue -L | grep "value" | head -n 1 | awk "{ print \$3 }")'
+
+## eclean
+alias eeclean-kernel='sudo mount /boot && sudo eclean-kernel -n 1 ; sudo umount /boot'
